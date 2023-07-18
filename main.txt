@@ -1,0 +1,40 @@
+package main
+
+import "fmt"
+
+func main() {
+	//buffered channel declaration
+	// ch:= make(chan type, capacity)
+	/*
+	  the capacity of the buffer is specified while declaring the variable.
+	*/
+	/*
+			Syntax :
+
+		ch := make(chan type, capacity)           // chan defines channel type
+	*/
+	ch := make(chan int, 10)
+	//sending and receiving data from a buffered channel
+	ch <- 5
+	ch <- 10
+	ch <- 15
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+}
+
+/*
+Channels can be defined as pipes used for Goroutines to communicate.
+Similar to how water flows from one end to another in a pipe, data can
+be sent from one end and received from the another end using channels.
+By default channels are unbuffered, which states that they will only
+accept sends (chan <-) if there is a corresponding receive (<- chan)
+which are ready to receive the sent value. Buffered channels allows to
+accept a limited number of values without a corresponding receiver for
+those values. It is possible to create a channel with a buffer. Buffered
+channel are blocked only when the buffer is full. Similarly receiving
+from a buffered channel are blocked only when the buffer will be empty.
+
+Buffered channels can be created by passing an additional capacity
+parameter to the make( ) function which specifies the size of the buffer.
+*/
